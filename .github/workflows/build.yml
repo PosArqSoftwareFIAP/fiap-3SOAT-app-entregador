@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - develop
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -18,3 +18,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+
+
+  createPullRequest:
+    needs: sonarcloud
+    runs-on: ubuntu-latest
+    if: ${{ needs.sonarcloud.result == 'success' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "develop"
+          destination_branch: "main"
+          pr_title: "Merge Develop into Main"
+          pr_body: "Automated PR to merge `develop` changes into `main`."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
