@@ -1,1 +1,0 @@
-from .restaurante_rotas import restaurante_bp

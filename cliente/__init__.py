@@ -1,1 +1,0 @@
-from .cliente_rotas import cliente_bp
