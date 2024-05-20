@@ -9,5 +9,3 @@ db_password = os.getenv('MYSQL_PASSWORD')
 db_port     = 25060
 db_database = 'FIAP-FOOD'
 
-
-# variaveis de...

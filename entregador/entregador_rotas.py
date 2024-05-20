@@ -1,17 +1,13 @@
 from flask import Blueprint, jsonify,request
 import sys
 from db import db_mysql_class
-from flasgger import swag_from
 
 entregador_bp = Blueprint('entregador', __name__)
 
 
 
-
-
 # Rota para criar um novo entregador
 @entregador_bp.route('/entregador/cria_entregador', methods=['POST'])
-@swag_from('../swagger_yaml/create_entregador.yaml')
 def create_entregador():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -30,11 +26,8 @@ def create_entregador():
         conn.close()
 
 
-
-
 # Rota para recuperar o entregador
 @entregador_bp.route('/entregador/consulta_entregador/<int:id>', methods=['GET'])
-@swag_from('../swagger_yaml/get_entregador.yaml')
 def get_entregador(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -54,13 +47,8 @@ def get_entregador(id):
         conn.close()
 
 
-
-
-
-
 # Rota para atualizar um entregador pelo ID
 @entregador_bp.route('/entregador/atualiza_entregador/<int:id>', methods=['PUT'])
-@swag_from('../swagger_yaml/update_entregador.yaml')
 def update_entregador(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -79,12 +67,8 @@ def update_entregador(id):
         conn.close()
 
 
-
-
-
 # Rota para excluir um entregador pelo ID
 @entregador_bp.route('/entregador/deleta_entregador/<int:id>', methods=['DELETE'])
-@swag_from('../swagger_yaml/delete_entregador.yaml')
 def delete_entregador(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -101,17 +85,8 @@ def delete_entregador(id):
         conn.close()
 
 
-
-
-
-
-
-
-
-
 # Rota para recuperar todos os produtos
 @entregador_bp.route('/entregador/consulta_all/', methods=['GET'])
-@swag_from('../swagger_yaml/get_entregador_all.yaml')
 def get_entregador_all():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -131,15 +106,8 @@ def get_entregador_all():
         conn.close()
 
 
-
-
-
-
-
-
 # Rota para recuperar todos os entregador
 @entregador_bp.route('/entregador/consulta_entregador_disponivel/', methods=['GET'])
-@swag_from('../swagger_yaml/get_entregador_disponivel.yaml')
 def get_entregador_disponivel():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -159,11 +127,8 @@ def get_entregador_disponivel():
         conn.close()
 
 
-
-
 # Rota para atualizar um entregador pelo ID para disponivel
 @entregador_bp.route('/entregador/atualiza_entregador_disponivel/<int:id>', methods=['PUT'])
-@swag_from('../swagger_yaml/update_entregador_disponivel.yaml')
 def update_entregador_disponivel(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -181,13 +146,8 @@ def update_entregador_disponivel(id):
         conn.close()
 
 
-
-
-
-
 # Rota para atualizar um entregador pelo ID para indisponivel
 @entregador_bp.route('/entregador/atualiza_entregador_indisponivel/<int:id>', methods=['PUT'])
-@swag_from('../swagger_yaml/update_entregador_indisponivel.yaml')
 def update_entregador_indisponivel(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -206,15 +166,8 @@ def update_entregador_indisponivel(id):
 
 
 
-
-
-
-
-
-
 # Rota para recuperar o entregador e torna-lo indisponivel
 @entregador_bp.route('/entregador/seleciona_entregador/', methods=['GET'])
-@swag_from('../swagger_yaml/seleciona_entregador.yaml')
 def seleciona_entregador():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -235,31 +188,6 @@ def seleciona_entregador():
     finally:
         cursor.close()
         conn.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             # query = "UPDATE entregador SET disponivel = %s WHERE id_entregador = %s"
             # values = (False, entregador_json['id_entregador'])

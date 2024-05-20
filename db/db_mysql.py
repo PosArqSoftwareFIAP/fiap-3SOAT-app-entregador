@@ -6,9 +6,6 @@ import sys
 class db_mysql_class:
     def __init__(self):
 
-        
-
-
         # Configurações do banco de dados
         self.db_config = {
             'host':     config.db_host,
