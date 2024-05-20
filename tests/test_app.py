@@ -28,6 +28,12 @@ class TestApp(TestCase):
     def test_update_entregador_indisponivel(self):
         response = self.client.put('/entregador/atualiza_entregador_indisponivel/3')
         self.assertEqual(response.status_code, 200)
+    
+    
+    def test_update_entregador_indisponivel_teste(self):
+        response = self.client.put('/entregador/atualiza_entregador_indisponivel_teste/3')
+        self.assertEqual(response.status_code, 200)
+
 
     def test_update_entregador_disponivel(self):
         response = self.client.put('/entregador/atualiza_entregador_disponivel/3')
