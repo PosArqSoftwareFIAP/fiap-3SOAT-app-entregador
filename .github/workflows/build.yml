@@ -9,6 +9,12 @@ jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+
+    env:
+      MYSQL_HOST: leo-pessoal-do-user-9421695-0.b.db.ondigitalocean.com
+      MYSQL_PASSWORD: AVNS_ap_g-5JOgfWvQdn4cIQ
+      MYSQL_USER: doadmin
+
     steps:
       - uses: actions/checkout@v2
         with:
