@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python }}
-      - name: Install testeing_flask
+      - name: Install flask_testing
         run: pip install flask_testing
       - name: Install tox and any other packages
         run: pip install tox
