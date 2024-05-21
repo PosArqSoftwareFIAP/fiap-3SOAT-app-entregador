@@ -165,23 +165,6 @@ def update_entregador_indisponivel(id):
         conn.close()
 
 
-@entregador_bp.route('/entregador/atualiza_entregador_indisponivel_teste/<int:id>', methods=['PUT'])
-def update_entregador_indisponivel_teste(id):
-    db_objt = db_mysql_class()
-    conn = db_objt.get_db_connection()
-    cursor = conn.cursor()
-    try:
-        query = "UPDATE entregador SET disponivel = %s WHERE id_entregador = %s"
-        values = (False, id)
-        cursor.execute(query, values)
-        conn.commit()
-        return jsonify({"message": "Entregador atualizado com sucesso"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
-    finally:
-        cursor.close()
-        conn.close()
-
 
 # Rota para recuperar o entregador e torna-lo indisponivel
 @entregador_bp.route('/entregador/seleciona_entregador/', methods=['GET'])
