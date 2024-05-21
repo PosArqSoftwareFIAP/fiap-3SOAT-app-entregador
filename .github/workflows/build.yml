@@ -21,6 +21,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Install flask_testing
         run: pip install flask_testing
+        
+      - name: Verify installation of flask_testing
+        run: |
+          pip show flask_testing
+          
       - name: Install tox and any other packages
         run: pip install tox
       - name: Run tox
