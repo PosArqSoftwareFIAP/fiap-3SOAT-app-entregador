@@ -1,4 +1,4 @@
-import src.config
+import config
 import mysql.connector
 import os
 import sys
