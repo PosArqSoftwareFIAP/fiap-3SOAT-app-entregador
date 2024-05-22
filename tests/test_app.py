@@ -1,15 +1,15 @@
-# import pytest
+import pytest
 
-# import sys,os
-# sys.path.insert(0, os.path.abspath('/home/runner/.local/lib/python3.10/site-packages')) 
-# from flask_testing import TestCase
+import sys,os
+sys.path.insert(0, os.path.abspath('/home/runner/.local/lib/python3.10/site-packages')) 
+from flask_testing import TestCase
 
-# import sys,os
+import sys,os
 
-# # Adiciona o diretório raiz ao caminho do sistema
-# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Adiciona o diretório raiz ao caminho do sistema
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# from app import app
+from app import app
 
 # class TestApp(TestCase):
 #     def create_app(self):
