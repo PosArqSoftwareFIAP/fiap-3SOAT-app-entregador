@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify,request
 import sys
-from src.db import db_mysql_class
+from src.db.db_mysql import db_mysql_class 
 
 entregador_bp = Blueprint('entregador', __name__)
 
