@@ -43,21 +43,21 @@ jobs:
         run: |
           pip show flask_testing
 
-      - name: Install dependencies
-        run: |
-          pip install pytest-cov
-          python3 -m coverage run -m unittest discover -s tests
-          python3 -m coverage xml -o coverage.xml
+      # - name: Install dependencies
+      #   run: |
+      #     pip install pytest-cov
+      #     python3 -m coverage run -m unittest discover -s tests
+      #     python3 -m coverage xml -o coverage.xml
 
 
 
 
-# # Tox files
-#       - name: Install tox and any other packages
-#         run: pip install tox
+# Tox files
+      - name: Install tox and any other packages
+        run: pip install tox
         
-#       - name: Run tox
-#         run: tox -e py
+      - name: Run tox
+        run: tox -e py
 
 
       - name: SonarCloud Scan
