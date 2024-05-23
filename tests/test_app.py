@@ -9,7 +9,7 @@ import sys,os
 # Adiciona o diretório raiz ao caminho do sistema
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.app import app
+from app import app
 
 class TestApp(TestCase):
     def create_app(self):

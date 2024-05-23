@@ -1,9 +1,9 @@
 from flask import Flask,jsonify,request
 
-from entregador import entregador_bp
+from src.entregador import entregador_bp
 
 from functools import wraps
-from db import db_mysql_class
+from src.db import db_mysql_class
 
    
 # def token_required(f):
