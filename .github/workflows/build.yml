@@ -31,7 +31,8 @@ jobs:
 
 
       - name: Print env
-        run: echo "MYSQL ${{secrets.MYSQL_HOST}}"
+        run: |
+         env
 
       - name: Install virtual env
         run: |
@@ -51,7 +52,11 @@ jobs:
         run: |
           pip show flask_testing
 
-      - name: Install dependencies
+      - name: Run coverage
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
         run: |
           pip install pytest-cov
           python3 -m coverage run -m unittest discover -s tests
