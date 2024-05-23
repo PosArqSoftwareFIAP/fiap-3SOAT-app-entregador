@@ -5,15 +5,19 @@ on:
       - develop
   pull_request:
     types: [opened, synchronize, reopened]
+
+
+env:
+  MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+  MYSQL_USER: ${{ secrets.MYSQL_USER }}
+
+
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
 
-    env:
-      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
 
 
     steps:
@@ -27,7 +31,7 @@ jobs:
 
 
       - name: Print env
-        run: echo "MYSQL &{{secrets.MYSQL_HOST}}"
+        run: echo "MYSQL ${{secrets.MYSQL_HOST}}"
 
       - name: Install virtual env
         run: |
