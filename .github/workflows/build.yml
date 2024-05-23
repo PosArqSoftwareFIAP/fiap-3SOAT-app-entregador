@@ -15,6 +15,7 @@ jobs:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       MYSQL_USER: ${{ secrets.MYSQL_USER }}
 
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -24,6 +25,9 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
+
+      - name: Print env
+        run: echo "MYSQL &{{secrets.MYSQL_HOST}}"
 
       - name: Install virtual env
         run: |
