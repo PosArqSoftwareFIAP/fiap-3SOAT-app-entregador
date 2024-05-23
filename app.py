@@ -7,7 +7,7 @@ from db import db_mysql_class
 
    
 # def token_required(f):
-#     token = None
+#     token = None 
 
 #     if 'Authorization' in request.headers:
 #         if request.headers['Authorization']:
