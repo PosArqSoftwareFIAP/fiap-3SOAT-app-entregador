@@ -49,6 +49,21 @@ def test_get_entregador(mock_get_db_connection, client):
     mock_conn.close.assert_called_once()
 
 @patch('src.db.db_mysql_class.get_db_connection')
+def test_get_entregador_not_found(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = None
+    
+    response = client.get('/entregador/consulta_entregador/999')
+    
+    assert response.status_code == 404
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
 def test_update_entregador(mock_get_db_connection, client):
     mock_conn = MagicMock()
     mock_cursor = MagicMock()
@@ -96,6 +111,21 @@ def test_get_entregador_all(mock_get_db_connection, client):
     mock_conn.close.assert_called_once()
 
 @patch('src.db.db_mysql_class.get_db_connection')
+def test_get_entregador_all_empty(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchall.return_value = []
+    
+    response = client.get('/entregador/consulta_all/')
+    
+    assert response.status_code == 404
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
 def test_get_entregador_disponivel(mock_get_db_connection, client):
     mock_conn = MagicMock()
     mock_cursor = MagicMock()
@@ -106,6 +136,21 @@ def test_get_entregador_disponivel(mock_get_db_connection, client):
     response = client.get('/entregador/consulta_entregador_disponivel/')
     
     assert response.status_code == 200
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_get_entregador_disponivel_empty(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchall.return_value = []
+    
+    response = client.get('/entregador/consulta_entregador_disponivel/')
+    
+    assert response.status_code == 404
     mock_cursor.execute.assert_called_once()
     mock_cursor.close.assert_called_once()
     mock_conn.close.assert_called_once()
@@ -151,6 +196,21 @@ def test_seleciona_entregador(mock_get_db_connection, client):
     response = client.get('/entregador/seleciona_entregador/')
     
     assert response.status_code == 200
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_seleciona_entregador_not_found(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = None
+    
+    response = client.get('/entregador/seleciona_entregador/')
+    
+    assert response.status_code == 404
     mock_cursor.execute.assert_called_once()
     mock_cursor.close.assert_called_once()
     mock_conn.close.assert_called_once()
