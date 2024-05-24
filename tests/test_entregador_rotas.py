@@ -215,5 +215,161 @@ def test_seleciona_entregador_not_found(mock_get_db_connection, client):
     mock_cursor.close.assert_called_once()
     mock_conn.close.assert_called_once()
 
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_update_entregador_success(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    
+    response = client.put('/entregador/atualiza_entregador/1', json={
+        'nome': 'Teste Atualizado', 'cpf': '12345678900', 'telefone': '999999999', 'email': 'teste@teste.com', 'placa': 'ABC1234', 'tipo_veiculo': 'carro', 'disponivel': True
+    })
+    
+    assert response.status_code == 200
+    mock_cursor.execute.assert_called_once()
+    mock_conn.commit.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_update_entregador_fail(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.execute.side_effect = Exception("Database error")
+    
+    response = client.put('/entregador/atualiza_entregador/1', json={
+        'nome': 'Teste Atualizado', 'cpf': '12345678900', 'telefone': '999999999', 'email': 'teste@teste.com', 'placa': 'ABC1234', 'tipo_veiculo': 'carro', 'disponivel': True
+    })
+    
+    assert response.status_code == 400
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_create_entregador_success(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    
+    response = client.post('/entregador/cria_entregador', json={
+        'nome': 'Teste', 'cpf': '12345678900', 'telefone': '999999999', 'email': 'teste@teste.com', 'placa': 'ABC1234', 'tipo_veiculo': 'carro', 'disponivel': True
+    })
+    
+    assert response.status_code == 201
+    mock_cursor.execute.assert_called_once()
+    mock_conn.commit.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_create_entregador_fail(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.execute.side_effect = Exception("Database error")
+    
+    response = client.post('/entregador/cria_entregador', json={
+        'nome': 'Teste', 'cpf': '12345678900', 'telefone': '999999999', 'email': 'teste@teste.com', 'placa': 'ABC1234', 'tipo_veiculo': 'carro', 'disponivel': True
+    })
+    
+    assert response.status_code == 400
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_delete_entregador_success(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    
+    response = client.delete('/entregador/deleta_entregador/1')
+    
+    assert response.status_code == 200
+    mock_cursor.execute.assert_called_once()
+    mock_conn.commit.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_delete_entregador_fail(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.execute.side_effect = Exception("Database error")
+    
+    response = client.delete('/entregador/deleta_entregador/1')
+    
+    assert response.status_code == 400
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_seleciona_entregador_success(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = {'id_entregador': 1, 'nome': 'Teste', 'disponivel': 1}
+    
+    response = client.get('/entregador/seleciona_entregador/')
+    
+    assert response.status_code == 200
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_seleciona_entregador_not_found(mock_get_db_connection, client):
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = None
+    
+    response = client.get('/entregador/seleciona_entregador/')
+    
+    assert response.status_code == 404
+    mock_cursor.execute.assert_called_once()
+    mock_cursor.close.assert_called_once()
+    mock_conn.close.assert_called_once()
+
+@patch('src.db.db_mysql_class.get_db_connection')
+def test_seleciona_entregador_fail(mock_get_db_connection, client):
+    # Dado: Uma conexão de banco de dados que lançará uma exceção
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_get_db_connection.return_value = mock_conn
+    mock_conn.cursor.return_value = mock_cursor
+    mock_cursor.execute.side_effect = Exception("Erro no banco de dados")
+    
+    # Quando: O cliente solicita selecionar um entregador disponível
+    response = client.get('/entregador/seleciona_entregador/')
+    
+    # Então: A resposta deve ser um erro 400
+    assert response.status_code == 400
+    
+    # E: O método execute deve ser chamado uma vez
+    mock_cursor.execute.assert_called_once()
+    
+    # E: O cursor deve ser fechado uma vez
+    mock_cursor.close.assert_called_once()
+    
+    # E: A conexão deve ser fechada uma vez
+    mock_conn.close.assert_called_once()
+
+
+
 if __name__ == '__main__':
     pytest.main()
