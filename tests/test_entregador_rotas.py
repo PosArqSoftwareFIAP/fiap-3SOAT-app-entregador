@@ -2,6 +2,10 @@ import pytest
 from unittest.mock import patch, MagicMock
 from src.entregador.entregador_rotas import entregador_bp, create_entregador, get_entregador, update_entregador, delete_entregador, get_entregador_all, get_entregador_disponivel, update_entregador_disponivel, update_entregador_indisponivel, seleciona_entregador
 from flask import Flask
+import sys,os
+sys.path.insert(0, os.path.abspath('/home/runner/.local/lib/python3.10/site-packages')) 
+from flask_testing import TestCase
+
 
 @pytest.fixture
 def client():
@@ -150,3 +154,6 @@ def test_seleciona_entregador(mock_get_db_connection, client):
     mock_cursor.execute.assert_called_once()
     mock_cursor.close.assert_called_once()
     mock_conn.close.assert_called_once()
+
+if __name__ == '__main__':
+    pytest.main()
